@@ -39,4 +39,5 @@ mkdir -p ./AppDir/bin
 cd ./OpenBoardView
 cmake -DCMAKE_BUILD_TYPE=Release .
 make -j$(nproc)
+ls
 mv -v bin/openboardview ../AppDir/bin
