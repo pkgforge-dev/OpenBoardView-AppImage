@@ -20,20 +20,26 @@ get-debloated-pkgs --add-common --prefer-nano
 #make-aur-package PACKAGENAME
 
 # If the application needs to be manually built that has to be done down here
-
-# if you also have to make nightly releases check for DEVEL_RELEASE = 1
-#
-# if [ "${DEVEL_RELEASE-}" = 1 ]; then
-# 	nightly build steps
-# else
-# 	regular build steps
-# fi
-echo "Making nightly build of OpenBoardView..."
+echo "Building OpenBoardView..."
 echo "---------------------------------------------------------------"
 REPO="https://github.com/OpenBoardView/OpenBoardView"
-VERSION="$(git ls-remote "$REPO" HEAD | cut -c 1-9 | head -1)"
-git clone --recursive --depth 1 "$REPO" ./OpenBoardView
+if [ "${DEVEL_RELEASE-}" = 1 ]; then
+    echo "Making nightly build of OpenBoardView..."
+    echo "---------------------------------------------------------------"
+    VERSION="$(git ls-remote "$REPO" HEAD | cut -c 1-9 | head -1)"
+    git clone --recursive --depth 1 "$REPO" ./OpenBoardView
+else
+	echo "Making stable build of OpenBoardView..."
+	VERSION="$(git ls-remote --tags --sort="v:refname" "$REPO" | tail -n1 | sed 's/.*\///; s/\^{}//')"
+	git clone -recursive --depth 1 --branch "$VERSION" --single-branch "$REPO" ./OpenBoardView
+fi
 echo "$VERSION" > ~/version
+#echo "Making nightly build of OpenBoardView..."
+#echo "---------------------------------------------------------------"
+#REPO="https://github.com/OpenBoardView/OpenBoardView"
+#VERSION="$(git ls-remote "$REPO" HEAD | cut -c 1-9 | head -1)"
+#git clone --recursive --depth 1 "$REPO" ./OpenBoardView
+#echo "$VERSION" > ~/version
 
 mkdir -p ./AppDir/bin
 cd ./OpenBoardView
