@@ -30,7 +30,8 @@ if [ "${DEVEL_RELEASE-}" = 1 ]; then
     git clone --recursive --depth 1 "$REPO" ./OpenBoardView
 else
 	echo "Making stable build of OpenBoardView..."
-	VERSION=$(git ls-remote --tags --refs "$REPO" | awk -F/ '{print $NF}' | sort -V | tail -n1)
+	VERSION=$(git ls-remote --tags --refs "$REPO" | awk -F/ '{print $NF}' | \
+          sed -E 's/^v?(([0-9]+\.?)+)/\1\t&/' | sort -V | tail -n1 | cut -f2)
 	git clone --recursive --depth 1 --branch "$VERSION" --single-branch "$REPO" ./OpenBoardView
 fi
 echo "$VERSION" > ~/version
