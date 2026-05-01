@@ -43,7 +43,7 @@ echo "$VERSION" > ~/version
 
 mkdir -p ./AppDir/bin
 cd ./OpenBoardView
-cmake -DCMAKE_BUILD_TYPE=Release .
+cmake -DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DCMAKE_BUILD_TYPE=Release .
 make -j$(nproc)
 ls
 mv -v src/openboardview/openboardview ../AppDir/bin
