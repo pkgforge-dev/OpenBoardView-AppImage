@@ -11,9 +11,9 @@
 </p>
 
 
-| Latest Stable Release | Upstream URL |
-| :---: | :---: |
-| [Click here](https://github.com/pkgforge-dev/OpenBoardView-AppImage/releases/latest) | [Click here](https://github.com/OpenBoardView/OpenBoardView) |
+| Latest Stable Release | Latest Nightly Release | Upstream URL |
+| :---: | :---: | :---: |
+| [Click here](https://github.com/pkgforge-dev/OpenBoardView-AppImage/releases/latest) | [Click here](https://github.com/pkgforge-dev/OpenBoardView-AppImage/releases/tag/nightly) | [Click here](https://github.com/OpenBoardView/OpenBoardView) |
 
 </div>
 
