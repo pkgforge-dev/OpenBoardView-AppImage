@@ -3,16 +3,17 @@
 set -eu
 
 ARCH=$(uname -m)
-VERSION=$(pacman -Q PACKAGENAME | awk '{print $2; exit}') # example command to get version of application here
-export ARCH VERSION
+export ARCH
 export OUTPATH=./dist
 export ADD_HOOKS="self-updater.hook"
 export UPINFO="gh-releases-zsync|${GITHUB_REPOSITORY%/*}|${GITHUB_REPOSITORY#*/}|latest|*$ARCH.AppImage.zsync"
 export ICON=https://raw.githubusercontent.com/OpenBoardView/OpenBoardView/f17c1ecaec96a2a69da83b91a01108f92bbebc68/asset/icon.svg
-export DESKTOP=PATH_OR_URL_TO_DESKTOP_ENTRY
+export DEPLOY_GTK=1
+export GTK_DIR=gtk-3.0
+export DEPLOY_OPENGL=1
 
 # Deploy dependencies
-quick-sharun /PATH/TO/BINARY_AND_LIBRARIES_HERE
+quick-sharun ./AppDir/bin/openboardview
 
 # Additional changes can be done in between here
 
