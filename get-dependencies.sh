@@ -27,3 +27,15 @@ get-debloated-pkgs --add-common --prefer-nano
 # else
 # 	regular build steps
 # fi
+echo "Making nightly build of OpenBoardView..."
+echo "---------------------------------------------------------------"
+REPO="https://github.com/OpenBoardView/OpenBoardView"
+VERSION="$(git ls-remote "$REPO" HEAD | cut -c 1-9 | head -1)"
+git clone "$REPO" ./OpenBoardView
+echo "$VERSION" > ~/version
+
+mkdir -p ./AppDir/bin
+cd ./OpenBoardView
+cmake -DCMAKE_BUILD_TYPE=Release .
+make -j$(nproc)
+mv -v openboardview ../AppDir/bin
