@@ -37,8 +37,6 @@ cd ./OpenBoardView && (
 	fi
 	cmake -DCMAKE_BUILD_TYPE=Release ./
 	make -j"$(nproc)"
-#	ls -lA ./
-#	ls -lA ./src/openboardview
 )
 
 mkdir -p ./AppDir/bin
