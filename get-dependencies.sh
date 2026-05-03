@@ -22,28 +22,24 @@ get-debloated-pkgs --add-common --prefer-nano
 # If the application needs to be manually built that has to be done down here
 echo "Building OpenBoardView..."
 echo "---------------------------------------------------------------"
-REPO="https://github.com/OpenBoardView/OpenBoardView"
-if [ "${DEVEL_RELEASE-}" = 1 ]; then
-    echo "Making nightly build of OpenBoardView..."
-    echo "---------------------------------------------------------------"
-    VERSION="$(git ls-remote "$REPO" HEAD | cut -c 1-9 | head -1)"
-    git clone --recursive --depth 1 "$REPO" ./OpenBoardView
-else
-	echo "Making stable build of OpenBoardView..."
-	VERSION=9.95.2
-    git clone --branch "$VERSION" --single-branch "$REPO" ./OpenBoardView
-fi
-echo "$VERSION" > ~/version
-#echo "Making nightly build of OpenBoardView..."
-#echo "---------------------------------------------------------------"
-#REPO="https://github.com/OpenBoardView/OpenBoardView"
-#VERSION="$(git ls-remote "$REPO" HEAD | cut -c 1-9 | head -1)"
-#git clone --recursive --depth 1 "$REPO" ./OpenBoardView
-#echo "$VERSION" > ~/version
+git clone --recursive https://github.com/OpenBoardView/OpenBoardView ./OpenBoardView
+cd ./OpenBoardView && (
+	if [ "${DEVEL_RELEASE-}" = 1 ]; then
+		echo "Making nightly build of OpenBoardView..."
+		echo "---------------------------------------------------------------"
+		git rev-parse --short HEAD > ~/version
+	else
+		echo "Making stable build of OpenBoardView..."
+		echo "---------------------------------------------------------------"
+		TAG=$(git tag | grep -vi 'rc\|alpha\|^R' | sort -nr | head -1)
+		git checkout "$TAG"
+		echo "$TAG" > ~/version
+	fi
+	cmake -DCMAKE_BUILD_TYPE=Release ./
+	make -j"$(nproc)"
+	ls -lA ./
+	ls -lA ./src/openboardview
+)
 
 mkdir -p ./AppDir/bin
-cd ./OpenBoardView
-cmake -DCMAKE_BUILD_TYPE=Release .
-make -j$(nproc)
-ls
-mv -v src/openboardview/openboardview ../AppDir/bin
+mv -v ./OpenBoardView/src/openboardview/openboardview ./AppDir/bin
