@@ -40,4 +40,4 @@ cd ./OpenBoardView && (
 )
 
 mkdir -p ./AppDir/bin
-mv -v ./openboardview/openboardview ./AppDir/bin
+mv -v OpenBoardView/openboardview/openboardview ./AppDir/bin
