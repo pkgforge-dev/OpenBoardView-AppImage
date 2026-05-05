@@ -40,4 +40,4 @@ fi
 cmake -DCMAKE_BUILD_TYPE=Release .
 make -j"$(nproc)"
 ls
-mv -v openboardview/openboardview ./AppDir/bin
+mv -v openboardview/openboardview ../AppDir/bin
