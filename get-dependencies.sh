@@ -40,4 +40,5 @@ cd ./OpenBoardView && (
 )
 
 mkdir -p ./AppDir/bin
+ls
 mv -v OpenBoardView/openboardview/openboardview ./AppDir/bin
