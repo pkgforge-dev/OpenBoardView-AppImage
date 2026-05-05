@@ -37,7 +37,6 @@ else
 	git checkout "$TAG"
 	echo "$TAG" > ~/version
 fi
-cmake -DCMAKE_BUILD_TYPE=Release .
+cmake -DCMAKE_BUILD_TYPE=Release ./
 make -j"$(nproc)"
-ls
-mv -v openboardview/openboardview ../AppDir/bin
+mv -v ./src/openboardview/openboardview ../AppDir/bin
