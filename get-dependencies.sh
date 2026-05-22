@@ -34,9 +34,13 @@ else
 	echo "Making stable build of OpenBoardView..."
 	echo "---------------------------------------------------------------"
 	TAG=$(git tag | grep -vi 'rc\|alpha\|^R' | sort -nr | head -1)
-	git checkout "$TAG"
+	if [ -z "$TAG" ]; then
+		TAG=$(git rev-parse --short HEAD)
+	else
+		git checkout "$TAG"
+	fi
 	echo "$TAG" > ~/version
 fi
-cmake -DCMAKE_BUILD_TYPE=Release .
+cmake -DCMAKE_BUILD_TYPE=Release ./
 make -j"$(nproc)"
 mv -v ./src/openboardview/openboardview ../AppDir/bin
