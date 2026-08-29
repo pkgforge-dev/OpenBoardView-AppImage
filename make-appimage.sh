@@ -8,8 +8,6 @@ export OUTPATH=./dist
 export ADD_HOOKS="self-updater.hook"
 export UPINFO="gh-releases-zsync|${GITHUB_REPOSITORY%/*}|${GITHUB_REPOSITORY#*/}|latest|*$ARCH.AppImage.zsync"
 export ICON=https://raw.githubusercontent.com/OpenBoardView/OpenBoardView/f17c1ecaec96a2a69da83b91a01108f92bbebc68/asset/icon.svg
-export DEPLOY_GTK=1
-export GTK_DIR=gtk-3.0
 export USE_HOST_DRIVERS_EXPERIMENTAL=1
 
 # Deploy dependencies
