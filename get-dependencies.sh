@@ -17,7 +17,8 @@ get-debloated-pkgs --add-common --prefer-nano libdecor-mini
 
 echo "Building OpenBoardView..."
 echo "---------------------------------------------------------------"
-git clone --recursive --depth 1 https://github.com/OpenBoardView/OpenBoardView ./OpenBoardView
+REPO="https://github.com/OpenBoardView/OpenBoardView"
+git clone --recursive --depth 1 "$REPO" ./OpenBoardView
 
 mkdir -p ./AppDir/bin
 cd ./OpenBoardView
