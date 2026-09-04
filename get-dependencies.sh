@@ -38,5 +38,5 @@ else
 	echo "$TAG" > ~/version
 fi
 cmake -DCMAKE_BUILD_TYPE=Release ./
-make -j"$(nproc)"
+make -j$(nproc)
 mv -v ./src/openboardview/openboardview ../AppDir/bin
