@@ -6,10 +6,7 @@ ARCH=$(uname -m)
 
 echo "Installing package dependencies..."
 echo "---------------------------------------------------------------"
-pacman -Syu --noconfirm \
-    cmake    	 \
-	python-jinja \
-    sdl2
+pacman -Syu --noconfirm cmake python-jinja sdl2-compat
 
 echo "Installing debloated packages..."
 echo "---------------------------------------------------------------"
